@@ -1,0 +1,5 @@
+package uce.distribuida.catucuamba.mensajeria;
+
+public class SingerListener {
+
+}

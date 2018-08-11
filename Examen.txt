@@ -1,0 +1,6 @@
+
+
+user : gvnuppap
+pass : E3FvSwV2t5zFG52vdkPbrLE_xcpP4gUT
+
+queue: distribuida

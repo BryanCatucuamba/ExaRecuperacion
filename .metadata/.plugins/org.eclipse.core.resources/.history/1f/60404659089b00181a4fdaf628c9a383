@@ -1,0 +1,16 @@
+spring.application.name=server01jdbc
+########################################################
+#configuracion 
+#cambiamos el puerto donde e va a ejecutar la aplicacion
+server.port=8010
+
+
+spring.datasource.url=jdbc:derby:target/database/message;create=true;user=app;password=app
+spring.datasource.driverClassName=org.apache.derby.jdbc.EmbeddedDriver
+spring.datasource.username=app
+spring.datasource.password=app
+
+#spring.rabbitmq.username=gvnuppap
+#spring.rabbitmq.password=E3FvSwV2t5zFG52vdkPbrLE_xcpP4gUT
+#spring.rabbitmq.host=lion.rmq.cloudamqp.com
+#spring.rabbitmq.virtual-host=gvnuppap

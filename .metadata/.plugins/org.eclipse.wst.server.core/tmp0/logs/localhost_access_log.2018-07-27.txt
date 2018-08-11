@@ -1,0 +1,8 @@
+127.0.0.1 - - [27/Jul/2018:10:14:23 -0500] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [27/Jul/2018:10:14:24 -0500] "GET /clienteV1/ HTTP/1.1" 200 1384
+0:0:0:0:0:0:0:1 - - [27/Jul/2018:10:14:25 -0500] "GET /clienteV1/javax.faces.resource/jsf.js.xhtml;jsessionid=C59387A188B4D54B31A4E1A5EB84E8BF?ln=javax.faces HTTP/1.1" 200 44386
+0:0:0:0:0:0:0:1 - - [27/Jul/2018:10:14:27 -0500] "POST /clienteV1/index.xhtml;jsessionid=C59387A188B4D54B31A4E1A5EB84E8BF HTTP/1.1" 500 6686
+127.0.0.1 - - [27/Jul/2018:10:30:08 -0500] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [27/Jul/2018:10:30:09 -0500] "GET /clienteV1/ HTTP/1.1" 200 1295
+0:0:0:0:0:0:0:1 - - [27/Jul/2018:10:30:13 -0500] "POST /clienteV1/index.xhtml HTTP/1.1" 500 9143
+0:0:0:0:0:0:0:1 - - [27/Jul/2018:10:30:30 -0500] "POST /clienteV1/index.xhtml HTTP/1.1" 500 9131

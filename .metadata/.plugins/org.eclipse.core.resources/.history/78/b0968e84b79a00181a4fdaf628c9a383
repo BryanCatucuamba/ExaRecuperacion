@@ -1,0 +1,18 @@
+package uce.distribuida.catucuamba.mensajeria;
+
+import uce.distribuida.catucuamba.entidades.*;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class SingerListener {
+	
+	
+	
+    public void receiveMessage(Singer singer) {
+
+        System.out.println(">>>>> actualizando lista de cantantes");
+
+    }
+
+}

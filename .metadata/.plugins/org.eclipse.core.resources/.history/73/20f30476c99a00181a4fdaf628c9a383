@@ -1,0 +1,23 @@
+package uce.distribuida.catucuamba;
+
+
+
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
+@SpringBootApplication(scanBasePackages = {"uce.distribuida.catucuamba"})
+public class Server01JdbcApplication {
+	
+	
+	
+	public static void main(String[] args) {
+		SpringApplication.run(Server01JdbcApplication.class, args);
+	}
+
+	
+	
+}
+
+

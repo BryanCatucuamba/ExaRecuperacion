@@ -1,0 +1,28 @@
+package uce.distribuida.catucuamba;
+
+
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+
+
+@SpringBootApplication(scanBasePackages = {"uce.distribuida.catucuamba"})
+public class Server01JdbcApplication {
+	
+	
+	
+	public static void main(String[] args) {
+		SpringApplication.run(Server01JdbcApplication.class, args);
+	}
+
+	
+	
+}
+
+

@@ -1,0 +1,55 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.3.RELEASE'
+		       
+		
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'uce.distribuida.catucuamba'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+    springCloudVersion = 'Finchley.RELEASE'
+}
+
+configurations {
+	providedRuntime
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-amqp')
+	// https://mvnrepository.com/artifact/org.apache.derby/derby
+testCompile group: 'org.apache.derby', name: 'derby', version: '10.14.2.0'
+// https://mvnrepository.com/artifact/org.apache.derby/derbyclient
+compile group: 'org.apache.derby', name: 'derbyclient', version: '10.14.2.0'
+
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	
+	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+	
+}
+
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}

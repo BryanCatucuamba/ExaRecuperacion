@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+
+</h:head>
+<h:body>
+
+	<h1>Singers</h1>
+	
+	<h3>Agregar Singer :</h3>
+    <h:form id="form1">
+        <h:panelGrid columns="2">
+         <label>Nombre :</label>
+        <h:inputText value="#{instrumentAction.instrument.id}" />
+        <h:commandButton action="#{instrumentAction.crear}" value="Crear"/>
+        </h:panelGrid>
+    </h:form>
+
+		<h:form id="formT">
+		<h:panelGroup id="panelT">
+			<h:dataTable id="table" rows="30"
+				value="#{singerAction.getSingers()}" var="singer"
+				headerClass="text-center" footerClass="text-center">
+				<f:facet name="header">
+					<h:outputText value="Lista Singers" />
+				</f:facet>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="NOMBRE" />
+					</f:facet>
+					<h:outputText value="#{singer.firstName}" />
+				</h:column>
+			</h:dataTable>
+		</h:panelGroup>
+	</h:form>
+
+</h:body>
+</html>

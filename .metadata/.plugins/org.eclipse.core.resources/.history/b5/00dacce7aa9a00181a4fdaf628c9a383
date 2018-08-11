@@ -1,0 +1,7 @@
+spring.application.name=server02jdbc
+########################################################
+#configuracion 
+#cambiamos el puerto donde e va a ejecutar la aplicacion
+server.port=8020
+
+

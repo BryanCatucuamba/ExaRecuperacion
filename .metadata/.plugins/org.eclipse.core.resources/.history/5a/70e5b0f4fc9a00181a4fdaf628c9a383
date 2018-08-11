@@ -1,0 +1,65 @@
+package uce.distribuida.catucuamba.servicios;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import uce.distribuida.catucuamba.cache.CacheSinger;
+import uce.distribuida.catucuamba.entidades.Album;
+import uce.distribuida.catucuamba.entidades.Singer;
+import uce.distribuida.catucuamba.mensajeria.SingerListener;
+
+@Transactional
+@Repository
+public class AlbumServicioImpl implements AlbumServicio {
+
+	@Autowired
+	CacheSinger cache;
+	
+	@Override
+	public List<Album> listarAlbums() {
+		
+		List<Singer> lista = cache.listarSingers();
+		
+		List<Album> ret = new ArrayList<>();
+		
+		
+		Album dto = new Album();
+
+		dto.setId(1);
+		dto.setId(1);
+		dto.setTitle("album1");
+
+		ret.add(dto);
+
+		ret.forEach( s->{
+			
+			Integer id = s.getId( );
+			
+			Singer singer = buscarSinger(lista, id);
+			
+			if( singer!=null ) {
+				s.setSingerName( singer.getFirstName( ) + " " + singer.getLastName( ) );
+			}
+		});
+		
+		return ret;
+	}
+	
+	public Singer buscarSinger(List<Singer> lista, int id) {
+		
+		for (Singer singer : lista) {
+			if (singer.getId()==id) {
+				return singer;
+			}
+		}
+		
+		return null;
+		
+	}
+
+}

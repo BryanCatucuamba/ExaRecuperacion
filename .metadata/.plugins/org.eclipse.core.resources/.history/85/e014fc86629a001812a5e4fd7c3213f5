@@ -1,0 +1,60 @@
+package uce.distribuida.catucuamba.controladores;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import uce.distribuida.catucuamba.entidades.Album;
+import uce.distribuida.catucuamba.entidades.Instrument;
+
+
+
+public class AlbumAction {
+	
+	private Album album;
+	private List<Album> albums;
+	
+	
+	
+	RestTemplate restTemplate;
+
+
+
+	public Album getAlbum() {
+		return album;
+	}
+
+
+
+	public void setAlbum(Album album) {
+		this.album = album;
+	}
+
+
+
+	public void setAlbums(List<Album> albums) {
+		this.albums = albums;
+	}
+
+	@PostConstruct
+	public void inicializar( ) {
+		restTemplate = new RestTemplate();
+		album = new Album();
+	}
+	
+
+ 
+	public List<Album> getAlbums(){
+		albums = restTemplate.getForObject("http://localhost:8020/album/albums" , List.class);
+	    System.out.println(albums);
+		return albums;
+	}
+	
+
+}

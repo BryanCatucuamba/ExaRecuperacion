@@ -1,0 +1,113 @@
+package uce.distribuida.catucuamba.servicios;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
+import org.springframework.amqp.core.Queue;
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import uce.distribuida.catucuamba.entidades.Singer;
+
+@Transactional
+@Service
+public class SingerServicioImpl implements SingerServicio {
+
+	public static final String topicExchangeName = "distribuida-exchange";
+
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
+	
+	@Autowired
+	private DataSource dataSource;
+
+	private JdbcTemplate jdbcTemplate;
+
+	@PostConstruct
+	public void inicializar() {
+		jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
+	@Override
+	public void crear(Singer obj) {
+
+		/*System.out.println(">>>>> NOTIFICANDO (revise s2): " + "Se ha creado singer : " + obj.getFirstName() + " "
+				+ obj.getLastName());*/
+		
+		String sql = "insert into instrument(instrument_id) values (?)";
+		
+		Object[] params = { obj.getId() };
+		
+		jdbcTemplate.update(sql, params );
+
+		rabbitTemplate.convertAndSend(SingerServicioImpl.topicExchangeName, "foo.bar.baz", obj);
+
+	}
+
+	@Override
+	public List<Singer> listarTodos() {
+
+		/*List<Singer> ret = new ArrayList<>();
+
+		Singer dto = new Singer();
+
+		dto.setId(1);
+		dto.setFirstName("name1");
+		dto.setLastName("lastname1");
+		dto.setVersion(1);
+		dto.setBirthDate(new Date());
+		dto.setEmail("bryan1993caj@gmail.com");
+
+		ret.add(dto);
+
+		dto = new Singer();
+
+		dto.setId(2);
+		dto.setFirstName("name2");
+		dto.setLastName("lastname2");
+		dto.setVersion(2);
+		dto.setBirthDate(new Date());
+		dto.setEmail("bryan1993caj@gmail.com");
+
+		ret.add(dto);
+
+		return ret;*/
+		
+		String sql = "select * from singer";
+
+		List<Map<String, Object>> lista = jdbcTemplate.queryForList(sql);
+
+		// metodo listarTodos devuelve una lista de cantantes hay que crear la lista
+		List<Singer> ret = new ArrayList<Singer>();
+
+		lista.forEach(cantante -> {
+
+			System.out.println(cantante);
+
+			Singer dto = new Singer();
+
+			dto.setId((Integer) cantante.get("singer_id"));
+			dto.setFirstName((String) cantante.get("first_name"));
+			dto.setLastName((String) cantante.get("last_name"));
+			dto.setBirthDate((Date) cantante.get("birth_date"));
+			dto.setVersion((Integer) cantante.get("version"));
+			dto.setEmail((String) cantante.get("email"));
+
+			ret.add(dto);
+
+		});
+
+		return ret;
+		
+	}
+
+}

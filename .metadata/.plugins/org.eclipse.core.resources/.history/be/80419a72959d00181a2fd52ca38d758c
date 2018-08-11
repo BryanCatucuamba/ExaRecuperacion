@@ -1,0 +1,17 @@
+###############################################
+
+#zuul
+spring.application.name=gateway
+server.port=9090
+zuul.prefix=/api
+
+#para registrar de servidor en servidor, cambiar path, mapear las que vienen x defecto
+#zuul.routes.server01_jdbc=/servidor01/*
+
+#s1 Singer
+zuul.routes.server01_jdbc.path=/singer/**
+zuul.routes.server01_jdbc.url=http://localhost:8010
+
+#s2 Album
+zuul.routes.server02_jdbc.path=/album/**
+zuul.routes.server02_jdbc.url=http://localhost:8020

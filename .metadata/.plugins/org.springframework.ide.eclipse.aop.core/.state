@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="configuracion_server"/>
+<aop-project name="server02_jdbc"/>
+<aop-project name="server01_jdbc"/>
+<aop-project name="webCliente"/>
+<aop-project name="gateway_1"/>
+<aop-project name="registro_server"/>
+</aop-reference-model>

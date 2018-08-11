@@ -1,0 +1,4 @@
+server.port=8888
+spring.application.name=serverconfigS
+spring.cloud.config.server.git.uri=https://github.com/BryanCatucuamba/Configuracion_PropertiesS.git
+#management.security.enabled=false

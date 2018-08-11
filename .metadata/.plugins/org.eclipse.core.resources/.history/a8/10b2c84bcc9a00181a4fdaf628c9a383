@@ -1,0 +1,40 @@
+package uce.distribuida.catucuamba;
+
+
+
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import uce.distribuida.catucuamba.entidades.Singer;
+import uce.distribuida.catucuamba.servicios.SingerServicio;
+
+
+@SpringBootApplication(scanBasePackages = {"uce.distribuida.catucuamba"})
+public class Server01JdbcApplication {
+	
+	@PostConstruct
+	public void inicializarDB() {
+		Singer s = new Singer();
+		s.setFirstName("NOMBRE");
+		s.setLastName("APELLIDO");
+		s.setEmail("email");
+		s.setVersion(1);
+		singerServicio.crear(s);
+	}
+	
+	@Autowired
+	SingerServicio singerServicio;
+	
+	public static void main(String[] args) {
+		SpringApplication.run(Server01JdbcApplication.class, args);
+	}
+
+	
+	
+}
+
+

@@ -1,0 +1,60 @@
+package uce.distribuida.catucuamba.controladores;
+
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import uce.distribuida.catucuamba.entidades.Singer;
+import uce.distribuida.catucuamba.servicios.SingerServicio;
+
+@RestController
+@RequestMapping(value = "/singer")
+public class SingerControlador {
+
+	@Autowired
+	private SingerServicio singerServicio;
+
+	@Autowired
+	private Environment environment;
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(value = "/singers")
+	public List<Singer> findAll() {
+
+		String puerto = environment.getProperty("server.port");
+		System.out.println("Puerto de la consulta: " + puerto);
+
+		return singerServicio.listarTodos();
+	}
+	
+		@ResponseStatus(HttpStatus.CREATED)
+	   @RequestMapping("/crear_singer/{nombre}/{apellido}/{fecha}/{version}/{email}")
+	    public Singer create(@PathVariable String nombre, @PathVariable String apellido,@PathVariable String fecha, @PathVariable String version, @PathVariable String email) throws ParseException{
+			
+			SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+			
+			
+			Singer nuevo = new Singer();
+	    	nuevo.setFirstName(nombre);
+	    	nuevo.setLastName(apellido);
+	    	//nuevo.setBirthDate(fecha);
+	    	//System.out.println(formato.parse(fecha));
+	    	nuevo.setVersion(Integer.parseInt(version));
+	    	nuevo.setEmail(email);
+	    	singerServicio.crear(nuevo);
+	        return nuevo;
+	    }
+	
+
+
+}

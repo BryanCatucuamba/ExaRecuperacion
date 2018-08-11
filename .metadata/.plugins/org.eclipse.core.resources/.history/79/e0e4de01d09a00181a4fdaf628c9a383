@@ -1,0 +1,59 @@
+package uce.distribuida.catucuamba;
+
+
+
+
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+
+import uce.distribuida.catucuamba.entidades.Singer;
+import uce.distribuida.catucuamba.servicios.SingerServicio;
+
+
+@SpringBootApplication(scanBasePackages = {"uce.distribuida.catucuamba"})
+public class Server01JdbcApplication {
+	
+	@PostConstruct
+	public void inicializarDB() {
+		Singer singer = new Singer();
+        singer.setFirstName("John");
+        singer.setLastName("Mayer");
+        singer.setBirthDate(new Date(
+                (new GregorianCalendar(1977, 9, 16)).getTime().getTime()));
+        singer.setVersion(1);
+        singer.setEmail("email");
+        singerServicio.crear(singer);
+	}
+	
+	@Autowired
+	SingerServicio singerServicio;
+	
+	@Bean
+	public DataSource dataSource() {
+
+		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+		EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.DERBY).addScript("createTable.sql").build();
+		return db;
+
+	}
+	
+	public static void main(String[] args) {
+		SpringApplication.run(Server01JdbcApplication.class, args);
+	}
+
+	
+	
+}
+
+

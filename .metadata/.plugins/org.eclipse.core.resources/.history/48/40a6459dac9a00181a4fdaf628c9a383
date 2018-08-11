@@ -1,0 +1,11 @@
+spring.application.name=server02jdbc
+########################################################
+#configuracion 
+#cambiamos el puerto donde e va a ejecutar la aplicacion
+server.port=8020
+
+
+spring.rabbitmq.username=gvnuppap
+spring.rabbitmq.password=E3FvSwV2t5zFG52vdkPbrLE_xcpP4gUT
+spring.rabbitmq.host=lion.rmq.cloudamqp.com
+spring.rabbitmq.virtual-host=gvnuppap

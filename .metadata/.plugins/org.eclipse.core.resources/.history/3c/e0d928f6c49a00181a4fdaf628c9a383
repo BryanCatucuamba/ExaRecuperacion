@@ -1,0 +1,73 @@
+package uce.distribuida.catucuamba.servicios;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+
+import org.springframework.amqp.core.Queue;
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import uce.distribuida.catucuamba.entidades.Singer;
+
+@Transactional
+@Service
+public class SingerServicioImpl implements SingerServicio {
+
+	
+
+	public static final String topicExchangeName = "distribuida-exchange";
+
+	@Autowired private RabbitTemplate rabbitTemplate;
+	
+
+	@Override
+	public void crear(Singer obj) {
+
+
+		System.out.println(">>>>> NOTIFICANDO (revise s2): " + "Se ha creado singer : " + obj.getFirstName() +" " +obj.getLastName());
+		
+        rabbitTemplate.convertAndSend( SingerServicioImpl.topicExchangeName, "foo.bar.baz", obj );
+
+		
+	}
+
+	@Override
+	public List<Singer> listarTodos() {
+
+		List<Singer> ret = new ArrayList<>();
+
+Singer dto = new Singer( );
+		
+		dto.setId( 1 );
+		dto.setFirstName( "name1" );
+		dto.setLastName( "lastname1" );
+		dto.setVersion( 1 );
+		dto.setBirthDate( new Date() );
+		dto.setEmail( "bryan1993caj@gmail.com" );
+
+		
+		ret.add( dto );
+		
+		dto = new Singer( );
+		
+		dto.setId( 2 );
+		dto.setFirstName( "name2" );
+		dto.setLastName( "lastname2" );
+		dto.setVersion( 2 );
+		dto.setBirthDate( new Date() );
+		dto.setEmail( "bryan1993caj@gmail.com" );
+
+		
+		ret.add( dto );
+		
+		return ret;
+	}
+
+	
+
+}
