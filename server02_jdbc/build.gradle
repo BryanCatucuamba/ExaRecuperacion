@@ -42,9 +42,6 @@ compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
 
 
 
-
-
-
 testCompile group: 'org.apache.derby', name: 'derby', version: '10.14.2.0'
 // https://mvnrepository.com/artifact/org.apache.derby/derbyclient
 compile group: 'org.apache.derby', name: 'derbyclient', version: '10.14.2.0'
@@ -52,6 +49,11 @@ compile group: 'org.apache.derby', name: 'derbyclient', version: '10.14.2.0'
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+	
+	
+	 //config cloud
+	compile('org.springframework.cloud:spring-cloud-starter-config')
+	//compile('org.springframework.boot:spring-boot-starter-actuator')
 	
 	
 }
